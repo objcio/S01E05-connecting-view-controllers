@@ -8,31 +8,31 @@
 
 import UIKit
 
+struct Episode {
+    var title: String
+}
+
 class ProfileViewController: UIViewController {
     var person: String = ""
 }
 
-class ItemsViewController: UITableViewController {
-    let items = ["one", "two", "three"]
-    var didSelect: String -> () = { _ in }
+class EpisodesViewController: UITableViewController {
+    let episodes = [Episode(title: "Episode One"), Episode(title: "Episode Two"), Episode(title: "Episode Three")]
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.count
+        return episodes.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-        cell.textLabel?.text = items[indexPath.row]
+        let episode = episodes[indexPath.row]
+        cell.textLabel?.text = episode.title
         return cell
-    }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        didSelect(items[indexPath.row])
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let vc = segue.destinationViewController as? DetailViewController {
-            vc.item = items[tableView.indexPathForSelectedRow!.row]
+            vc.episode = episodes[tableView.indexPathForSelectedRow!.row]
         } else if let nc = segue.destinationViewController as? UINavigationController,
             pvc = nc.viewControllers.first as? ProfileViewController {
             pvc.person = "My Name"
@@ -42,17 +42,16 @@ class ItemsViewController: UITableViewController {
     }
     
     @IBAction func unwindToHere(segue: UIStoryboardSegue) {
-        
     }
 }
 
 class DetailViewController: UIViewController {
     @IBOutlet weak var label: UILabel? {
         didSet {
-            label?.text = item
+            label?.text = episode?.title
         }
     }
-    var item: String?
+    var episode: Episode?
 }
 
 
