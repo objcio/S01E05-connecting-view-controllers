@@ -40,9 +40,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="dj0-iy-OTI" kind="show" id="Ohl-xU-pIP"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -53,7 +50,7 @@
                     <navigationItem key="navigationItem" id="t0f-rV-MKf">
                         <barButtonItem key="rightBarButtonItem" title="My Profile" id="1fQ-sq-EWj">
                             <connections>
-                                <segue destination="G6C-Pf-C6A" kind="presentation" id="EsM-bF-egK"/>
+                                <action selector="showProfile:" destination="4fr-JY-kot" id="d3Y-yY-bMr"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -90,19 +87,19 @@
                     <navigationItem key="navigationItem" title="My Profile" id="bmD-M8-J7t">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="Ho9-tt-KF6">
                             <connections>
-                                <segue destination="LmH-NY-JiG" kind="unwind" unwindAction="unwindToHere:" id="rRM-ao-8gU"/>
+                                <action selector="close:" destination="JOj-Di-gGA" id="R2M-eu-Aal"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d18-1Z-PdK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="LmH-NY-JiG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1652" y="343"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="rv2-FM-S0p">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MqU-3f-tMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="Detail" id="dj0-iy-OTI" customClass="DetailViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cwD-1D-aMT"/>
@@ -131,7 +128,6 @@
                         <outlet property="label" destination="cE9-RO-ubD" id="1e6-08-bVv"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MqU-3f-tMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1652" y="1072"/>
         </scene>
