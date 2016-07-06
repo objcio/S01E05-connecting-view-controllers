@@ -8,13 +8,16 @@
 
 import UIKit
 
+
 struct Episode {
     var title: String
 }
 
+
 class ProfileViewController: UIViewController {
     var person: String = ""
 }
+
 
 class EpisodesViewController: UITableViewController {
     let episodes = [Episode(title: "Episode One"), Episode(title: "Episode Two"), Episode(title: "Episode Three")]
@@ -37,13 +40,14 @@ class EpisodesViewController: UITableViewController {
             pvc = nc.viewControllers.first as? ProfileViewController {
             pvc.person = "My Name"
         } else {
-            fatalError()
+            fatalError("unknown segue")
         }
     }
     
     @IBAction func unwindToHere(segue: UIStoryboardSegue) {
     }
 }
+
 
 class DetailViewController: UIViewController {
     @IBOutlet weak var label: UILabel? {
@@ -55,17 +59,12 @@ class DetailViewController: UIViewController {
 }
 
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
         return true
     }
-
 }
 
