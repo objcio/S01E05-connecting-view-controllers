@@ -8,9 +8,11 @@
 
 import UIKit
 
+
 struct Episode {
     var title: String
 }
+
 
 class ProfileViewController: UIViewController {
     var person: String = ""
@@ -21,14 +23,17 @@ class ProfileViewController: UIViewController {
     }
 }
 
+
 class DetailViewController: UIViewController {
     @IBOutlet weak var label: UILabel? {
         didSet {
             label?.text = episode?.title
         }
     }
+
     var episode: Episode?
 }
+
 
 class EpisodesViewController: UITableViewController {
     let episodes = [Episode(title: "Episode One"), Episode(title: "Episode Two"), Episode(title: "Episode Three")]
@@ -56,6 +61,7 @@ class EpisodesViewController: UITableViewController {
     }
 }
 
+
 final class App {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let navigationController: UINavigationController
@@ -63,7 +69,7 @@ final class App {
     init(window: UIWindow) {
         navigationController = window.rootViewController as! UINavigationController
         let episodesVC = navigationController.viewControllers[0] as! EpisodesViewController
-        episodesVC.didSelect = { _ in self.showProfile() }
+        episodesVC.didSelect = showEpisode
         episodesVC.didTapProfile = showProfile
     }
     
@@ -86,10 +92,8 @@ final class App {
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
     var app: App?
-
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         if let window = window {
@@ -97,6 +101,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return true
     }
-
 }
 
