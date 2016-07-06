@@ -62,44 +62,31 @@ class EpisodesViewController: UITableViewController {
 }
 
 
-final class App {
-    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    let navigationController: UINavigationController
-
-    init(window: UIWindow) {
-        navigationController = window.rootViewController as! UINavigationController
-        let episodesVC = navigationController.viewControllers[0] as! EpisodesViewController
-        episodesVC.didSelect = showEpisode
-        episodesVC.didTapProfile = showProfile
-    }
-    
-    func showEpisode(episode: Episode) {
-        let detailVC = storyboard.instantiateViewControllerWithIdentifier("Detail") as! DetailViewController
-        detailVC.episode = episode
-        navigationController.pushViewController(detailVC, animated: true)
-    }
-    
-    func showProfile() {
-        let profileNC = self.storyboard.instantiateViewControllerWithIdentifier("Profile") as! UINavigationController
-        let profileVC = profileNC.viewControllers[0] as! ProfileViewController
-        profileVC.didTapClose = {
-            self.navigationController.dismissViewControllerAnimated(true, completion: nil)
-        }
-        navigationController.presentViewController(profileNC, animated: true, completion: nil)
-    }
-}
-
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    var app: App?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        if let window = window {
-            app = App(window: window)
+        let nc = window?.rootViewController as! UINavigationController
+        let episodesVC = nc.viewControllers[0] as! EpisodesViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        episodesVC.didSelect = { episode in
+            let detailVC = storyboard.instantiateViewControllerWithIdentifier("Detail") as! DetailViewController
+            detailVC.episode = episode
+            nc.pushViewController(detailVC, animated: true)
+        }
+        episodesVC.didTapProfile = {
+            let profileNC = storyboard.instantiateViewControllerWithIdentifier("Profile") as! UINavigationController
+            let profileVC = profileNC.viewControllers[0] as! ProfileViewController
+            profileVC.didTapClose = {
+                nc.dismissViewControllerAnimated(true, completion: nil)
+            }
+            nc.presentViewController(profileNC, animated: true, completion: nil)
         }
         return true
     }
 }
+
+
+
 
